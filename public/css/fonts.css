@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'neo-reg';
+    src: url('../fonts/NeoSans-regular.woff');
+}
+
+@font-face {
+    font-family: 'neo-bold';
+    src: url('../fonts/NeoSans-bold.woff');
+}
+
+@font-face {
+    font-family: 'kufi-reg';
+    src: url('../fonts/DroidKufi-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'kufi-bold';
+    src: url('../fonts/DroidKufi-Bold.ttf');
+}
