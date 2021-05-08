@@ -228,15 +228,7 @@
                                     <ul>
                                                                    
                     @auth
-                        @if (App::isLocale('en')) 
-                               <li> <a rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL( 'ar', null, [], true) }}">
-                             {{ __('auth.ar') }}
-                            </a></li>              
-                                 @else
-                               <li> <a rel="alternate" hreflang="en" href="{{ LaravelLocalization::getLocalizedURL( 'en', null, [], true) }}">
-                               {{ __('auth.en') }}
-                            </a></li>                
-                               @endif
+                     
                           
         
                              <li>
