@@ -27,9 +27,9 @@ class QuestionRequest extends FormRequest
             'course_id' => 'required|string|max:255',
             'correct_answer' =>'required|string|max:255',
             'question' =>'required|string|max:255',
-            '1' =>  'required|string|max:255',
-            '2' =>'required|string|max:255',
-            '3' => 'required|string|max:255',
+            'n1' =>  'required|string|max:255',
+            'n2' =>'required|string|max:255',
+            'n3' => 'required|string|max:255',
         ];
     }
 }

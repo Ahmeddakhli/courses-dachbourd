@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Providers;
+use App\Events\UserRegister;
+use App\Listeners\AdminUserRegNotify;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -20,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         courseaddwithtag::class => [
             SendEmailcoursewithtagNotification::class,
+        ],
+        UserRegister::class => [
+            AdminUserRegNotify::class,
         ],
     ];
 

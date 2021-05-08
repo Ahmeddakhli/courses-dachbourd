@@ -35,9 +35,37 @@ class TagController extends Controller
     {
       // $user=Lecturer::find(auth()->guard('lecturer')->user()->id);
      //  $user->tags()->detach($tag);
+    
+
      $tag->delete();
-        return redirect()->back()
-                        ->with('success','Project deleted deleted successfully');
+     return redirect()->back()
+                     ->with('success','Project deleted deleted successfully');
+
+
+    }
+    public function delusertag(Tag $tag)
+    {
+     
+     if(auth()->user()->id){
+         $user=User::find(auth()->user()->id);
+         $user->tags()->detach($tag); 
+         return redirect()->back()
+         ->with('success','Project deleted deleted successfully');
+     }     
+ 
+
+
+    }
+    public function dellecturertag(Tag $tag)
+    {
+     
+        if(auth()->guard('lecturer')->user()->id){
+            $user=Lecturer::find(auth()->guard('lecturer')->user()->id);
+            $user->tags()->detach($tag); 
+            return redirect()->back()
+            ->with('success','Project deleted deleted successfully');
+        }     
+ 
 
 
     }

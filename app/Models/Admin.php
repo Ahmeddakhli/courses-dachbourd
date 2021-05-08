@@ -45,6 +45,6 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    protected $table = 'lecturers';
+    protected $table = 'admins';
     protected $guarded = array();
 }

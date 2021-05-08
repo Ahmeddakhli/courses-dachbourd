@@ -89,6 +89,8 @@ class PaypalController extends Controller
 
             Order::create([
                 'order_num' => $result->id,
+                'payment_method' =>$result->payer->payment_method,
+                'payment_status' =>$result->payer->status,
                 'user_id' => Auth::user()->id ,
                 'course_id' =>session()->get('courseid') ,
             ]);

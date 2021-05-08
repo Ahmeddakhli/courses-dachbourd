@@ -7,6 +7,8 @@ use App\Models\Lecturer;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
+use \App\Http\Requests\LecturerRequest;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,15 +33,10 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(LecturerRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-            'phone' => 'required|string|min:11|unique:users',
-        ]);
+  
+      
 
         Auth::login($user = Lecturer::create([
             'name' => $request->name,
@@ -53,6 +50,6 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->back();
     }
 }

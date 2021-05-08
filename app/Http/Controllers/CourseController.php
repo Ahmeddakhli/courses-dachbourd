@@ -139,13 +139,29 @@ class CourseController extends Controller
      */
     public function storecourse(CourseRequest $request)
     { 
-        
-        Course::create($request->all());
+        $fileName = time().rand(0, 1000);
+        $fileName = $fileName.'.'.$request->img->extension();;  
+        $request->file('img')->storeAs('uploads', $fileName, 'public');
+
+        Course::create(
+            [
+                'title'=> $request->title,
+                'vedio_link'=>$request->vedio_link,
+                'img' =>$fileName,
+                'sex'=>$request->sex,
+               'description'=>$request->description,
+                'course_payment'=>$request->course_payment,
+                'course_mony'=>$request->course_mony,
+                'wellcome_massage'=>$request->wellcome_massage,
+                'start_at'=>$request->start_at,
+                'end_at'=>$request->end_at,
+            ]
+        );
         $course=Course::get()->last();
         $course->tags()->syncWithoutDetaching( $request->tags);
         event(new courseaddwithtag($course));
 
-        return redirect(route('lecturerhome'));  
+        return redirect()-back()->withInput();  
 
     }
     /**
@@ -156,31 +172,31 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     { 
-        
-        
         $questions = Question::where('course_id', '=', $request->course_id)->get();
         $j=0;
-        for ($i = 1; $i  <= count($questions); $i++)
+        foreach($request->qids as $id)
         {
-            
-           if($request->$i ==  $questions->find($i)->correct_answer) 
+           if($request->$id ==  $questions->find($id)->correct_answer) 
            {
-            $j=$j+5; 
+            $j=$j+10; 
            }
 
 
         }
-        if( $j/$i*100>=50)
+    
+        if( $j>=10*count($request->qids)/2)
         {
            $order= Order::where('course_id', '=', $request->course_id)->where('user_id', '=',  Auth::user()->id)->first();
        
             
             Score::create([
                 'score' => $j,
+                'status' => 0,
                 'course_id' => $request->course_id ,
                 'user_id' =>Auth::user()->id ,
             ]);
-            $score = ($j/(($i-1)*5))*100;
+        
+            $score = ($j/(10*count($request->qids)))*100;
          return  view('certif',['course_id'=>$request->course_id,'score'=>$score]);
 
             

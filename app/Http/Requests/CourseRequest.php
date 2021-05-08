@@ -25,14 +25,18 @@ class CourseRequest extends FormRequest
     {
         return [
             'title'=>'required|string|max:255',
-            'vedio_link'=>'required|string|max:255',
+            'vedio_link'=>'required|url|max:255',
+            'img' =>'required',
+          
+
+            'img.*' =>'required|mimes:png,jpg|max:4048',
             'sex'=>'required|string',
            'description'=>'required|string|max:255',
             'course_payment'=>'required',
             'course_mony'=>'required|integer',
             'wellcome_massage'=>'required|string|max:255',
-            'start_at'=>'required|date',
-          
+            'start_at'=>'required|date|before:end_at',
+            'end_at'=>'required|date|after:start_at',
         ];
     }
 }

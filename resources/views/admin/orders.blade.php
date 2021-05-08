@@ -23,8 +23,9 @@
                       <th> course name</th>
                        <th> chekout_id</th>
                         <th>  mony </th>
-                      
-                        <th >status </th>
+                        <th >payment _method</th>
+                        <th >payment _status</th>
+
                     
                     
                     </tr>
@@ -38,7 +39,8 @@
                     <td colspan="">{{ $order->course->title}}</td>
                     <td>{{$order->order_num}}</td>
                     <td>{{$order->course->course_mony}}</td>
-                   <td>success</td>
+                   <td>{{$order->payment_method}}</td>
+                   <td>{{$order->payment_status}}</td>
 
                            
             

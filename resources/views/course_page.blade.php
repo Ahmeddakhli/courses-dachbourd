@@ -26,7 +26,7 @@
                           
 
                                 <li>
-                                    <a href="{{ route('alart', $course->id) }}">
+                                    <a href="{{ route('alartcourse', $course->id) }}">
                                         <i class="fa fa-bell"></i> التنويهات
                                     </a>
                                 </li>

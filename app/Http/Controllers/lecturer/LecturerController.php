@@ -34,13 +34,13 @@ class LecturerController extends Controller
     {
      
             $this->validate($request, [
-                'email'   => 'required|email',
-                'password' => 'required|min:6'
+                'email'    => 'required|email|min:5|max:191',
+                'password' => 'required|string|min:4|max:255',
             ]);
     
             if (Auth::guard('lecturer')->attempt(['email' => $request->email, 'password' => $request->password])) {
                 $request->session()->regenerate();
-                $user = auth()->guard('lecturer')->user();
+               
             
                 
                 return redirect(route('lecturerhome'));
@@ -48,10 +48,15 @@ class LecturerController extends Controller
             return back()->withInput($request->only('email'));
     }
   
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->guard('lecturer')->logout();
-         
+        Auth::guard('lecturer')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+       
         return redirect(route('lecturer.login'));
     }
     /**

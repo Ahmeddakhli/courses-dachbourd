@@ -12,11 +12,11 @@ class Score extends Model
         'score',
         'user_id',
         'course_id',
-     
+         'status',
     ];
     public function course()
     {
-        return $this->belongsTo(Test::class);
+        return $this->belongsTo(Course::class);
     }
     public function user()
     {

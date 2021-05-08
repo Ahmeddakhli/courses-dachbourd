@@ -1,26 +1,30 @@
 @extends('layouts.admin')
 
 @section('content')
- @foreach ($tags as $tag )
-   <div class="col-md-4">
-          <div class="box box-success box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">{{$tag->title}}</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
+   <div class="row content-header">
+            <div class="col-md-12 ">
+              <div class="box ">
+                  <h2 class="mb-4">all tags
+</h2>
+                      @foreach ($tags as $tag )
+                      
+                       
+                                         <div class="col-md-3">
+          <div class="info-box">
           
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
- @endforeach
+            <span class="info-box-icon bg-red"> <a href="{{route('deltag',$tag->id) }}"> <i class="fa fa-times" ></i> </a></span>
 
- <div class="col-md-9">
+            <div class="info-box-content">
+              <span class="info-box-text"><h3>{{ $tag->title}}</h3></span>
+              <span class="info-box-number">{{count( $tag->users )+count( $tag->lecturers)}} عدد المستخدمين</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+                      @endforeach
+
+ <div class="col-md-12">
  @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -61,4 +65,8 @@
           <!-- /.box -->
           
         </div>
+               </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div>
+
 @endsection

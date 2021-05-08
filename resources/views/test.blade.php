@@ -44,13 +44,15 @@
                                      <div class="answer" style=" margin-bottom: 10px; padding: 10px;background-color:#f1f1f1;">
                                                 <label>
                                                     <input type="radio" name="{{$question->id}}" id="make-answer"  value="{{$question->$i}}">
+
                                                     <span>{{$question->$i}}</span>
                                                     
                                                 </label>
                                             </div>
                                             <!-- end answer -->
                                @endfor
-                                            
+                               <input type="hidden" name="qids[]" id="make-answer"  value="{{$question->id}}">
+      
                                    
                                        
                                        
@@ -132,15 +134,19 @@
                             display.textContent = minutes + ":" + seconds;
 
                             if (--timer < 0) {
-                                timer = duration;
+                               
+                             window.location.replace("http://127.0.0.1:8000/courses");
+
                             }
                         }, 1000);
+
                     }
 
                     window.onload = function () {
-                        var fiveMinutes = 60 * 5,
+                        var fiveMinutes = 60 * .5,
                             display = document.querySelector('#time');
                         startTimer(fiveMinutes, display);
+
                     };
 </script>
 @endsection

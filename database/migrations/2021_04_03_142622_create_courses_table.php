@@ -21,6 +21,8 @@ class CreateCoursesTable extends Migration
             $table->text('description');
             $table->string('sex');
             $table->date('start_at');
+            $table->date('end_at');
+
             $table->string('course_payment');
             $table->string('course_mony');
             $table->string('certificate_title')->nullable();

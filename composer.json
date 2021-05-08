@@ -6,16 +6,27 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "brian2694/laravel-toastr": "^5.54",
+        "consoletvs/charts": "^6.5",
+        "cornford/googlmapper": "2.*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
+        "laravel/sanctum": "^2.10",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
+        "laraveldaily/laravel-charts": "^0.1.25",
         "mcamara/laravel-localization": "^1.6",
         "nexmo/client": "^2.4",
         "paypal/rest-api-sdk-php": "*",
-        "vonage/client": "^2.4"
+        "realrashid/sweet-alert": "^3.2",
+        "vonage/client": "^2.4",
+        "yajra/laravel-datatables": "1.5",
+        "yajra/laravel-datatables-buttons": "^4.13",
+        "yajra/laravel-datatables-html": "^4.36",
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

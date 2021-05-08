@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Admin;
 
-
 class AdminAuthController extends Controller
 {
     /*
@@ -45,7 +44,7 @@ class AdminAuthController extends Controller
 
     public function getLogin()
     {
-        return view('admin.login');
+        return view('admin.auth.login');
     }
 
     /**
@@ -56,18 +55,18 @@ class AdminAuthController extends Controller
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
+            'email'    => 'required|email|min:5|max:191',
+            'password' => 'required|string|min:4|max:255',
         ]);
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password]))
         {
-            $request->session()->regenerate();
-            $user = auth()->guard('admin')->user();
+           $request->session()->regenerate();
+          
             
             return redirect()->route('admin');
             
         } else {
-            return back()->with('error','your username or password are wrong.');
+            return back();
         }
 
     }
@@ -77,11 +76,13 @@ class AdminAuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function logout()
+    public function logout(Request $request)
     {
         $this->guard('admin')->logout();
 
-        auth()->guard('admin')->logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
        
              

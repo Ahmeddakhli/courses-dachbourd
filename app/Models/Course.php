@@ -27,6 +27,7 @@ class Course extends Model
         'approve',
         'approve_massage',
         'start_at',
+        'end_at',
     ];
     public function users()
     {

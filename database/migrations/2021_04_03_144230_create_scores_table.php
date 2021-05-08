@@ -17,6 +17,8 @@ class CreateScoresTable extends Migration
             $table->id();
       
             $table->integer('score');
+            $table->boolean('status');
+
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
 

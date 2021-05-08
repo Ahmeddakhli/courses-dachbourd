@@ -3,20 +3,61 @@
 
 namespace App\Http\Controllers\lecturer;
 use App\Http\Controllers\Controller;
+use \App\Http\Requests\LessonRequest;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
  
-    public function addlesson(Request $request,$id)
+    public function addlesson(LessonRequest $request,$id)
     {
     
-    
-    Lesson::create($request->all());
-    return redirect( route('lecturerhome') );
   
 
+        $fileName = time().rand(0, 1000);
+        $fileName = $fileName.'.'.$request->document_link->extension();;  
+        $request->file('document_link')->storeAs('uploads', $fileName, 'public');
+
+          
+            Lesson::create([
+                'course_id' =>$id ,
+                'description' => $request->description,
+                'document_link' => $fileName,
+                'order' =>  $request->order,
+                'title' => $request->title,
+                'vedio_link' =>  $request->vedio_link,
+            ]);
+            return redirect( )->back();
+            
+        
+    
+   
+
+    }
+    public function adminaddlesson(LessonRequest $request,$id)
+    {
+    
+  
+
+        $fileName = time().rand(0, 1000);
+        $fileName = $fileName.'.'.$request->document_link->extension();;  
+        $request->file('document_link')->storeAs('uploads', $fileName, 'public');
+
+          
+            Lesson::create([
+                'course_id' =>$id ,
+                'description' => $request->description,
+                'document_link' => $fileName,
+                'order' =>  $request->order,
+                'title' => $request->title,
+                'vedio_link' =>  $request->vedio_link,
+            ]);
+            return redirect( )->back();
+            
+        
+    
+   
 
     }
   

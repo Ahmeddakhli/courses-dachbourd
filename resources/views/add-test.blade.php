@@ -124,15 +124,15 @@
                                     <h1>يجب عليك اختيار اجابة صحيحة واحده</h1>
                                     <ul>
                                         <li>
-                                              <input type="radio" name="f" value="n1">
+                                              <input type="radio" name="correct_answer" value="n1">
                                             <input  name="n1" type="text" placeholder="اكتب الاجابة الاولي">
                                         </li>
                                         <li>
-                                              <input type="radio" name="f" value="n2">
+                                              <input type="radio" name="correct_answer" value="n2">
                                             <input name="n2" type="text" placeholder="اكتب الاجابة الثانية">
                                         </li>
                                         <li>
-                                              <input type="radio" name="f" value="n3">
+                                              <input type="radio" name="correct_answer" value="n3">
                                             <input name="n3" type="text" placeholder="اكتب الاجابة الثالثة">
                                         </li>
                                      

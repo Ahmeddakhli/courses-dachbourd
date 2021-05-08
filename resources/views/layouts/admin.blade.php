@@ -7,6 +7,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html>
   <head>
     <meta charset="UTF-8">
+        {{-- ChartScript --}}
+      @include('sweetalert::alert')
     <title>AdminLTE 2 | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -18,31 +20,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.css')}}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> 
+
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{asset('https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css
+')}}">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.7/css/rowReorder.dataTables.min.css
+">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css
+">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('dist/css/skins/skin-blue.min.css')}}">
     <link rel="stylesheet" href="{{asset('dist/css/bootstrap-rtl.min.css')}}">
+
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-   <style>
 
-div.dataTables_wrapper {
-        direction: rtl;
-    }
- 
-    /* Ensure that the demo table scrolls */
-    th, td { white-space: nowrap; }
-    div.dataTables_wrapper {
-        width: 1350px;
-         height: 1350px;
-        margin: 0 auto;
-    }</style>
   </head>
   <!--
   BODY TAG OPTIONS:
@@ -80,7 +86,7 @@ div.dataTables_wrapper {
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="{{asset('index2.html')}}" class="logo">
+        <a href="{{ route('courses') }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
           <!-- logo for regular state and mobile devices -->
@@ -104,31 +110,87 @@ div.dataTables_wrapper {
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
+      <aside class="main-sidebar" style="hieght: 100%;">
 
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+        <section class="sidebar" style="hieght: 100%;">
 
          
           <!-- /.search form -->
 
           <!-- Sidebar Menu -->
-          <ul class="sidebar-menu">
+          <ul class="sidebar-menu" style="hieght: 100%;">
            
             <!-- Optionally, you can add icons to the links -->
             
            
             <li class="active"><a href="{{ url('/admin') }}"><i class="fa fa-link"></i> <span>home</span></a></li>
-            <li><a href="{{ route('tags') }}"><i class="fa fa-link"></i> <span>All tags</span></a></li>
+  <li class="treeview" style="height: auto;">
+          <a href="#">
 
-            <li><a href="{{ route('client') }}"><i class="fa fa-link"></i> <span>All users</span></a></li>
-         <li><a href="{{ route('course') }}"><i class="fa fa-link"></i> <span>All courses</span></a></li>
-                  <li><a href="{{ route('lecturers') }}"><i class="fa fa-link"></i> <span>All lecturers</span></a></li>
+           @php
+             use App\Models\Adminnotifcation;
+              $newuser=  Adminnotifcation::where('isseen', '=', 0)->get();
+           @endphp
+           <h4> <span class="pull-left-container">
+              <small class="label pull-left bg-red">{{count($newuser)}}</small>
+            </span> 
+
+             <i class="fa fa-users"></i> <span>     users </span></h4>
+         
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+          <li><a href="{{ route('clientuser') }}"><i class="fa fa-circle-o"></i>  show users</a></li>
+               <li><a href="{{ route('registuser') }}"><i class="fa fa-circle-o"></i> add user</a></li>
+          </ul>
+        </li>
+        
+         <li class="treeview" style="height: auto;">
+          <a href="#">
+           
+           <h4><i class="fa fa-pie-chart"></i><span >   courses     </span></h4>
+                <i class="fa fa-angle-left pull-right"></i>
+         
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+<li><a href="{{ route('courses2') }}"><i class="fa fa-circle-o"></i> show courses</a></li>
+               <li><a href="{{ route('admincourse') }}"><i class="fa fa-circle-o"></i> add course</a></li>
+          </ul>
+        </li>
+          
+             
+         <li class="treeview" style="height: auto;">
+          <a href="#">
+           
+           <h4><i class="fa fa-user"></i><span >   lecturers    </span></h4>
+         
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+              <li><a href="{{ route('addminlecturer') }}"><i class="fa fa-circle-o"></i>All lecturers</a></li>
+               <li><a href="{{ route('registlectuer') }}"><i class="fa fa-circle-o"></i> add lecturer</a></li>
+          </ul>
+        </li>
+           <li class="treeview" style="height: auto;">
+          <a href="#">
+           
+           <h4><i class="fa fa-user"></i><span >   All tags    </span></h4>
+         
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+                <li><a href="{{ route('tags') }}"><i class="fa fa-circle-o"></i> add tag</a></li>
+          </ul>
+        </li>
+           
+      
+               <li><a href="{{ route('order2') }}"><i class="fa fa-link"></i> <span>All orders</span></a></li>
+
+                  <li><a href="{{ route('admin.show.certification') }}"><i class="fa fa-link"></i> <span>All certification
+</span></a></li>
+
                   <li><a href="{{ route('Financial') }}"><i class="fa fa-link"></i> <span>All Financial</span></a></li>
-                  <li><a href="{{ route('settings') }}"><i class="fa fa-link"></i> <span>All settings</span></a></li>
-                  <li><a href="{{ route('orders') }}"><i class="fa fa-link"></i> <span>All orders</span></a></li>
-
-             <li><a href="{{ route('courses') }}"><i class="fa fa-link"></i> <span>go to website</span></a></li>
+                  <li><a href="{{ route('settingtable') }}"><i class="fa fa-link"></i> <span>All settings</span></a></li>
+       
+            <li><a href="{{ route('courses') }}"><i class="fa fa-link"></i> <span>go to website</span></a></li>
         
        <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -145,7 +207,7 @@ div.dataTables_wrapper {
                 <form method="get" action="{{ route('adminLogout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
+                    <x-responsive-nav-link :href=" route('adminLogout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
                                    <ul>  <li><h3><i class="fa fa-link">log out</i> </h3></li></ul>
@@ -168,7 +230,13 @@ div.dataTables_wrapper {
 <div class="card text-center">
   
   <div class="card-body">
+  
+  @toastr_js
+  <div class="content" style="min-height: 921px;">
               @yield('content')
+              </div>
+              @toastr_css
+              @toastr_js
 
   </div>
   
@@ -257,13 +325,24 @@ div.dataTables_wrapper {
 
 
     <!-- jQuery 2.1.4 -->
-    <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
-    <!-- Bootstrap 3.3.4 -->
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.7/js/dataTables.rowReorder.min.js
+"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js
+"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js
+"></script>
+<!-- Bootstrap 3.3.4 -->
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('dist/js/app.min.js')}}"></script>
- @yield('js');
+     @stack('jss');
 
+ @yield('js');
+ 
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the
          user experience. Slimscroll is required when using the

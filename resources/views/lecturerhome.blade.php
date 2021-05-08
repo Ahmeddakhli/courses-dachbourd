@@ -34,6 +34,7 @@
                                                                       <a href="{{route('lecturerLogout') }}" >
                                                             <i class="fa fa-power-off"></i>&nbsp; خروج
                                                         </a>
+                                                        
                                                     </li>
                                                 </ul>
                                             </div>
@@ -600,7 +601,7 @@
                                              
                                                 <li>
                                                     <span class="inter-item">{{ $tag->title}}
-                                                     <a href="{{route('deltag',$tag->id) }}"> <i class="fa fa-times" id="del-item"></i> </a>
+                                                     <a href="{{route('dellecturertag',$tag->id) }}"> <i class="fa fa-times" id="del-item"></i> </a>
                                                     </span>
                                                 </li>
                                                    @endforeach

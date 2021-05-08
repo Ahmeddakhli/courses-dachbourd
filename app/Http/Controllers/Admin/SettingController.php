@@ -32,40 +32,42 @@ class SettingController extends Controller
          
         Setting::create( $request->all());
         
-        return redirect()->route('settings')
+        return redirect()->back()
                         ->with('success','setting created successfully.');
         
     }
     public function addtolinks(Request $request)
     {
         $request->validate([
-            'value_ar' =>  'required|string |max:255',
-         
+            'value_ar' =>  'required|url |max:255',
+            'value_en' =>  'required|string |max:255',
+
             'name' => 'required|string |max:255',
         ]);
          
         Setting::create( $request->all());
         
-        return redirect()->route('settings')
+        return redirect()->back()
                         ->with('success','setting created successfully.');
         
     }
     public function updatesetting(Request $request, $id)
     {
         $request->validate([
-            'text' => [ 'string'],
-            'text1' =>[ 'string'] ,
-            'sub' =>[ 'string'] ,
+            'value_ar' =>  'required|url |max:255',
+            'value_en' =>  'required|string |max:255',
         ]);
          
-        Setting::find($id)->update([
-            'value_ar' => $request->text,
-            'value_en' => $request->text1,
-            'sub' => $request->sub,
-        ]);
+        Setting::find($id)->update($request->all());
         
-        return redirect()->route('settings')
+        return redirect()->back()
                         ->with('success','sting created successfully.');
         
+    }
+    public function deletsetting(Setting $setting)
+    {
+        $setting->delete();
+        return redirect()->back()
+        ->with('success','sting deleted successfully.');
     }
 }

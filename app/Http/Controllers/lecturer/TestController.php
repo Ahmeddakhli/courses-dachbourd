@@ -36,7 +36,7 @@ class TestController extends Controller
     
     public function storetest(QuestionRequest $request)
     {
-        $cor=$request->f;
+        $cor=$request->correct_answer;
     
         Question::create([
         
@@ -48,7 +48,26 @@ class TestController extends Controller
             '3' =>  $request->n3,
         
         ]);
-    return redirect( route('addtest', $request->course_id)  );
+    return redirect( )->back();
+  
+
+
+    }
+    public function adminstoretest(QuestionRequest $request)
+    {
+        $cor=$request->correct_answer;
+    
+        Question::create([
+        
+            'course_id' => $request->course_id,
+            'correct_answer' => $request->$cor,
+            'question' => $request->question,
+            '1' =>  $request->n1,
+            '2' => $request->n2,
+            '3' =>  $request->n3,
+        
+        ]);
+    return redirect( )->back();
   
 
 

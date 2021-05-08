@@ -38,7 +38,7 @@
                                              
                                                 <li>
                                                     <span class="inter-item">{{ $tag->title}}
-                                                     <a href="{{route('deltag',$tag->id) }}"> <i class="fa fa-times" id="del-item"></i> </a>
+                                                     <a href="{{route('delusertag',$tag->id) }}"> <i class="fa fa-times" id="del-item"></i> </a>
                                                     </span>
                                                 </li>
                                                    @endforeach

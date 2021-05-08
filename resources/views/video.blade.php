@@ -2,6 +2,9 @@
 
 @section('content')
  <div class="intro-container">
+ <?php use App\Models\User;
+  $completed= User::find(Auth::user()->id)->lessons->where('course_id',$course->id); ?> 
+
             <div class="intro-head text-center">
                 <div class="container">
                     <h1>الدرس الاول من  دورة البرمجة بلغة الجافا</h1>
@@ -20,8 +23,9 @@
                                    <iframe width="100%" height="520" src="https://www.youtube.com/embed/tTgD9m1p5Ss?list=PLT56sSeAKiIvfQhsA2lXUUmjfh0JyEFU7" frameborder="0" allowfullscreen></iframe>
                            
                             <div class="finish-corse text-left col-xs-12">
-                                
-                        <a href="{{ route('completed',$lesson->id ) }}">لقد انهيت هذا الدرس   </a> 
+
+                          <a href="{{ route('completed',$lesson->id ) }}">لقد انهيت هذا الدرس   </a> 
+
                                 <div class="lesson-desc col-xs-12 text-right">
                                     <h1>وصف المحاضرة</h1>
                                     <p>هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم إيبسوم نفسه عدة مرات بما تتطلبه الحاجة، يقوم مولّدنا هذا باستخدام كلمات من قاموس يحوي على أكثر من 200 كلمة لا تينية، مضاف إليها مجموعة من الجمل النموذجية، لتكوين نص لوريم إيبسوم ذو شكل منطقي قريب إلى النص الحقيقي. وبالتالي يكون النص الناتح خالي من التكرار، أو أي كلمات أو عبارات غير لائقة أو ما شابه. وهذا ما يجعله أول مولّد نص لوريم إيبسوم حقيقي على الإنترنت.
@@ -36,7 +40,6 @@
                     <!-- end corse_indv-video -->
   <div class="corse-episodes col-md-3 col-xs-12 text-right">
     <div class="corse_episodes-inner">
-          <?php use App\Models\User; $completed= User::find(Auth::user()->id)->lessons->where('course_id',$course->id); ?> 
 
         <ul>
             <li>

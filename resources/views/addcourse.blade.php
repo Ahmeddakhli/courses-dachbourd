@@ -9,14 +9,7 @@
                 </div>
                 <!-- /.container -->
             </div>
-            @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-      <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        </ul>
-    </div>
-@endif
             <!-- /.up-header -->
             <div class="up-box">
                 <div class="container">
@@ -27,6 +20,11 @@
                             <div class="up_form-item">
                                 <h1>عنوان الدورة</h1>
                                 <input name="title"  type="text" placeholder="اضف عنوان الدورة">
+                                          @if ($errors->has('title'))
+                <span class="invalid feedback"role="alert"  style="color: red;">
+                    <strong>{{ $errors->first('title') }}.</strong>
+                </span>
+        @endif
                             </div>
                             <!-- /.up_form-item -->
 
@@ -45,7 +43,11 @@
                                                         <span>{{ $tag->title}}</span>
                                                     </label>
                                                 </div>
-                                        
+                                                  @if ($errors->has('tags'))
+                <span class="invalid feedback"role="alert"  style="color: red;">
+                    <strong>{{ $errors->first('tags') }}.</strong>
+                </span>
+        @endif
                                                 <!-- /.interest-item -->
 
                                       @endforeach
@@ -71,7 +73,11 @@
                                     <!-- /.lecture-item -->
                                 </div>
                                 <input  name="vedio_link" type="text" placeholder="ادخل رابط فيديو" class="linked">
-
+          @if ($errors->has('vedio_link'))
+                <span class="invalid feedback"role="alert"  style="color: red;">
+                    <strong>{{ $errors->first('vedio_link') }}.</strong>
+                </span>
+        @endif
                             </div>
                             <!-- /.up_form-item -->
                             <div class="up_form-item">

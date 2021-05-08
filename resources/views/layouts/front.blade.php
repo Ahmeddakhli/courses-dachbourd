@@ -52,9 +52,21 @@
                     <li><a class="icon icon-data" href="{{ route('courses') }}"><i class="fa fa-user"></i> الرئيسية</a></li>
                     <li><a id="sd" class="icon icon-location" href="{{ route('about-us') }}"><i class="fa fa-group"></i>من نحن</a></li>
                     <li><a class="icon icon-photo" href="{{ route('contact-us') }}"><i class="fa fa-phone"></i>اتصل بنا</a></li>
+                    <li>
+                   @php
+           use App\Models\Setting;
 
-                    <li><a class="icon icon-study" href=""><i class="fa fa-file"></i>شهادة التقدير</a></li>
+               $link= Setting::all()->where('page',"link");
+           @endphp
+                    @foreach (  $link as $seting )
+                        
+                   
+                    <a  href="{{$seting->value_ar}}">{!!$seting->value_en!!} {{$seting->name}}</a>
+ @endforeach
+                    </li>
+
                 </ul>
+                         
             </nav>
             <div class="st-content">
                 <div class="dividers">
@@ -96,7 +108,9 @@
                             <div class="login-form col-md-6 col-xs-12 text-right pull-right">
                             
         
-
+ @toastr_js
+              @toastr_css
+              @toastr_js
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -150,6 +164,7 @@
                                                  تسجيل الدخول كمدرب
                                              </a> 
                                 </div>
+
                             </div>
                             <!-- /.login-form -->
   
@@ -241,6 +256,12 @@
                                                                     <i class="fa fa-user"></i>&nbsp; كورساتى
                                                                 </a>
                                                             </li>
+                                                                 <li>
+                                                                <a href="{{ route('mycertifications') }}">
+                                                                    <i class="fa fa-user"></i>&nbsp; شهاداتى
+                                                                </a>
+                                                            </li>
+                                                            
                                                              <li>
                                                                 <a href="{{ route('mytags') }}">
                                                                     <i class="fa fa-user"></i>&nbsp; مجالاتى
@@ -290,9 +311,38 @@
                     </div>
                     <!-- /.header-nav -->
                 </header>
-                <!-- /header -->
+                <!--               <input type="hidden" id="lng" data-lng="30.033333" value="30.033333">
+/header -->
 @yield('content')
+    <script>
+      var map;
+      // var user_id =document.getElementById('lng').value;
+     var tribeca = {lat: 31.233334, lng: 30.033333	};
 
+      function initMap() {
+        // Constructor creates a new map - only center and zoom are required.
+        map = new google.maps.Map(document.getElementById('map'), {
+          center:tribeca,
+          zoom: 13
+        });
+        var marker = new google.maps.Marker({
+          position: tribeca,
+          map: map,
+          title: 'القصيم بجوار قصر البارون,المنصوره ,مصر'
+        });
+    var Infowindow = new google.maps.InfoWindow({
+        content:'jbjhghvgtygctcytfciftfyttrtjghy'
+    });
+     marker.addListener('click', function() {
+            infowindow.open(map,marker );
+          });
+
+
+      }
+    </script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGRX9vzO5p4UHVwAdrUONwP4gT7OPGrt8&callback=initMap"></script>
     <!-- Javascript Files -->
     <script src="{{asset('js/jquery-2.2.2.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/bootstrap.min.js')}}" type="text/javascript"></script>

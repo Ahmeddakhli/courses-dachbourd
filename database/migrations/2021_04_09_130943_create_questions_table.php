@@ -17,9 +17,9 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->text('question');
             $table->text('correct_answer');  
-            $table->text('choice_1');   
-            $table->text('choice_2');
-            $table->text('choice_3');
+            $table->text('1');   
+            $table->text('2');
+            $table->text('3');
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->timestamps();
         });

@@ -13,8 +13,10 @@
                    {{ Session::get('success') }}
                   </div>
 @endif
-
- 
+<div class='card'> <div class='card-body'>
+   <div class="row content-header">
+            <div class="col-md-12 ">
+              <div class="box ">
 <table id="example" class="stripe row-border order-column" style="width:100% ; hieght:100%">
         <thead>
               <tr>
@@ -54,8 +56,8 @@
         </tbody>
         <h1 >${{ $all}} total Financial </h1>
     </table>
-  
-
+  </div></div>
+</div></div></div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

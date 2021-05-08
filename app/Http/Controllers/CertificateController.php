@@ -28,7 +28,6 @@ class CertificateController extends Controller
     public function certorder(CertificateRequest $request)
     {
 
-        
         Certificate::create([
             'user_id' => Auth::user()->id ,
             'course_id' =>$request->course_id,
